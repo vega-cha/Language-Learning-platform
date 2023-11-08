@@ -1,0 +1,79 @@
+type Course = record {
+  id : text;
+  name : text;
+  createdAt : nat64;
+  description : text;
+  updatedAt : opt nat64;
+};
+type CoursePayload = record { name : text; description : text };
+type Flashcard = record {
+  id : text;
+  createdAt : nat64;
+  term : text;
+  updatedAt : opt nat64;
+  courseId : text;
+  definition : text;
+};
+type FlashcardPayload = record {
+  term : text;
+  courseId : text;
+  definition : text;
+};
+type Quiz = record {
+  id : text;
+  question : text;
+  createdAt : nat64;
+  correctAnswer : text;
+  updatedAt : opt nat64;
+  courseId : text;
+  options : vec text;
+};
+type QuizPayload = record {
+  question : text;
+  correctAnswer : text;
+  courseId : text;
+  options : vec text;
+};
+type User = record {
+  id : text;
+  courses : vec text;
+  name : text;
+  createdAt : nat64;
+  email : text;
+  updatedAt : opt nat64;
+  progress : text;
+  goals : text;
+};
+type UserPayload = record {
+  name : text;
+  email : text;
+  progress : text;
+  goals : text;
+};
+type _AzleResult = variant { Ok : Course; Err : text };
+type _AzleResult_1 = variant { Ok : Flashcard; Err : text };
+type _AzleResult_2 = variant { Ok : Quiz; Err : text };
+type _AzleResult_3 = variant { Ok : User; Err : text };
+type _AzleResult_4 = variant { Ok : vec Course; Err : text };
+type _AzleResult_5 = variant { Ok : vec User; Err : text };
+type _AzleResult_6 = variant { Ok : vec Flashcard; Err : text };
+type _AzleResult_7 = variant { Ok : vec Quiz; Err : text };
+service : () -> {
+  createCourse : (CoursePayload) -> (_AzleResult);
+  createFlashcard : (FlashcardPayload) -> (_AzleResult_1);
+  createQuiz : (QuizPayload) -> (_AzleResult_2);
+  createUser : (UserPayload) -> (_AzleResult_3);
+  deleteCourse : (text) -> (_AzleResult);
+  getAllCourses : () -> (_AzleResult_4) query;
+  getAllUsers : () -> (_AzleResult_5) query;
+  getCourse : (text) -> (_AzleResult) query;
+  getFlashcard : (text) -> (_AzleResult_1) query;
+  getFlashcardsForCourse : (text) -> (_AzleResult_6) query;
+  getQuiz : (text) -> (_AzleResult_2) query;
+  getQuizzesForCourse : (text) -> (_AzleResult_7) query;
+  getUser : (text) -> (_AzleResult_3) query;
+  setLanguageLearningGoal : (text, text) -> (_AzleResult_3);
+  updateCourse : (text, CoursePayload) -> (_AzleResult);
+}
+
+
