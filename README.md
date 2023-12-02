@@ -1,6 +1,6 @@
-# Language_Learning_Platform
+# Language Learning Platform
 
-Welcome to your first Azle project! This example project will help you to deploy your first canister (application) to the Internet Computer (IC) decentralized cloud. It is a simple getter/setter canister. You can always refer to [The Azle Book](https://demergent-labs.github.io/azle/) for more in-depth documentation.
+Welcome to our Language Learning Platform! This web application is designed to elevate your language learning journey, providing a comprehensive and user-centric experience. Whether you're a beginner or an advanced learner, our platform offers a range of features to support your language learning goals.
 
 `dfx` is the tool you will use to interact with the IC locally and on mainnet. If you don't already have it installed:
 
@@ -27,21 +27,44 @@ npm install
 npm run canister_deploy_local
 ```
 
-To call the methods on your canister:
+## Usage
+The Language Learning Platform provides a user-friendly interface for language learning. Explore the different sections, create courses, add flashcards, and engage in interactive practice sessions. Customize your learning plan and track your progress effortlessly.
+
+## Interacting With Backend Using DFX tool
+The backend of the Language Learning Platform is powered by IC. Below are some key methods that can be interacted using dfx:
+
+**Create a Course:**
+
+You can replace Course Name and Course Description in your own freewill.
 
 ```bash
-npm run canister_call_get_message
-npm run canister_call_set_message
+dfx canister call Language_Learning_Platform createCourse '(record { name="Course Name"; description= "Course Description" })'
 ```
 
-If you run the above commands and then call `npm run canister_call_get_message` you should see:
+**Get a Course:**
+
+Provide course Id to get a course
 
 ```bash
-("Hello world!")
+dfx canister call Language_Learning_Platform getCourse '("CourseID")'
 ```
+
+**Get All Courses:**
+
+To get All available courses 
+
+```bash
+dfx canister call Language_Learning_Platform getAllCourses
+```
+
 
 Assuming you have [created a cycles wallet](https://internetcomputer.org/docs/current/developer-docs/quickstart/network-quickstart) and funded it with cycles, you can deploy to mainnet like this:
 
 ```bash
-npm run canister_deploy_mainnet
+dfx deploy --ic
 ```
+
+
+
+License
+This project is licensed under the MIT License.
